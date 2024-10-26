@@ -1,0 +1,26 @@
+def encrypt(message, shift):
+    encrypted_message = ""
+    for char in message:
+        if char.isalpha():  # Check if the character is a letter
+            # Shift character, handle both uppercase and lowercase letters
+            start = ord('A') if char.isupper() else ord('a')
+            encrypted_message += chr((ord(char) - start + shift) % 26 + start)
+        else:
+            encrypted_message += char  # Keep non-letter characters unchanged
+    return encrypted_message
+
+def decrypt(encrypted_message, shift):
+    return encrypt(encrypted_message, -shift)  # Decrypting is just encrypting with a negative shift
+
+# Main program
+if __name__ == "__main__":
+    user_message = input("Enter a message: ")
+    shift_value = 3
+
+    # Encrypt the message
+    encrypted = encrypt(user_message, shift_value)
+    print("Encrypted message:", encrypted)
+
+    # Decrypt the message
+    decrypted = decrypt(encrypted, shift_value)
+    print("Decrypted message:", decrypted)
